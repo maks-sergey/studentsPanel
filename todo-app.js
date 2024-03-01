@@ -55,8 +55,18 @@ function createTodoApp(container, title = 'Список дел', userKey) {
     container.append(todoItemForm.form);
     container.append(todoList);
 
-    let arrayFromLocalStorage = loadDataFromLocalStorage(userKey);
-    console.log(arrayFromLocalStorage);
+    let arrayOfCases = loadDataFromLocalStorage(userKey);
+    
+    if (arrayOfCases) {
+        console.log(arrayOfCases);
+        for (let value of arrayOfCases) {
+            let todoItem = createTodoItem(value);
+            todoList.append(todoItem.item);
+            value.done ? todoItem.item.classList.add('list-group-item-success') : null;
+        }
+    }
+    
+
 
 
     todoItemForm.input.addEventListener("input", function(){
