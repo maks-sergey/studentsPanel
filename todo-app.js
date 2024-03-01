@@ -63,6 +63,35 @@ function createTodoApp(container, title = 'Список дел', userKey) {
             let todoItem = createTodoItem(value);
             todoList.append(todoItem.item);
             value.done ? todoItem.item.classList.add('list-group-item-success') : null;
+            
+            let itemObj = value;
+            todoItem.doneButton.addEventListener('click', function() {
+                todoItem.item.classList.toggle('list-group-item-success');
+                            for (let value of arrayOfCases) {
+                                if (value.id === itemObj.id) { 
+                                    let doneIndex = arrayOfCases.indexOf(value);
+                                    arrayOfCases[doneIndex].done = !arrayOfCases[doneIndex].done;
+                                    console.log(arrayOfCases);
+                                    } else continue; 
+                            }
+                saveDataToLocalStorage(userKey, arrayOfCases);
+                return arrayOfCases;
+            });
+
+            todoItem.deleteButton.addEventListener('click', function() {
+                if (confirm('Вы уверены?')) {
+                            for (let value of arrayOfCases) {
+                                if (value.id === itemObj.id) {
+                                    let delIndex = arrayOfCases.indexOf(value);
+                                    arrayOfCases.splice(delIndex, 1);
+                                } else continue; 
+                                }
+                                console.log(arrayOfCases);
+                    todoItem.item.remove();
+                }
+                saveDataToLocalStorage(userKey, arrayOfCases);
+                return arrayOfCases;  
+            });
         }
     }
     
