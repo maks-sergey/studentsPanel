@@ -1,7 +1,5 @@
 (function() {
 
-    let arrayOfCases = [];
-
     function createAppTitle(title) {
         let appTitle = document.createElement('h2');
         appTitle.innerHTML = title;
@@ -63,8 +61,8 @@ function createTodoApp(container, title = 'Список дел', userKey) {
             let todoItem = createTodoItem(value);
             todoList.append(todoItem.item);
             value.done ? todoItem.item.classList.add('list-group-item-success') : null;
-            
             let itemObj = value;
+
             todoItem.doneButton.addEventListener('click', function() {
                 todoItem.item.classList.toggle('list-group-item-success');
                             for (let value of arrayOfCases) {
@@ -90,10 +88,12 @@ function createTodoApp(container, title = 'Список дел', userKey) {
                     todoItem.item.remove();
                 }
                 saveDataToLocalStorage(userKey, arrayOfCases);
-                return arrayOfCases;  
+                return arrayOfCases;
+                
             });
+
         }
-    }
+    } else arrayOfCases = [];
     
 
 
